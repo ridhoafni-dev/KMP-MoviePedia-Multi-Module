@@ -21,7 +21,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
-        }
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName") }
 
         androidMain.dependencies {
             implementation(compose.material3)

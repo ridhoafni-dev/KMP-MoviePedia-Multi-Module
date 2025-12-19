@@ -1,6 +1,6 @@
 package com.ridhoafni.kmpmoviepedia.features.details.ui
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.MutableStateFlow
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
@@ -12,7 +12,7 @@ class DetailsViewModel(
     private val detailsUseCases: GetMovieDetailsUseCases
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(viewModelScope, DetailsUiState())
-    @NativeCoroutineScope
+    @NativeCoroutinesState
     val uiState: StateFlow<DetailsUiState> = _uiState
 
     fun getMovies(id: String) = viewModelScope.launch {

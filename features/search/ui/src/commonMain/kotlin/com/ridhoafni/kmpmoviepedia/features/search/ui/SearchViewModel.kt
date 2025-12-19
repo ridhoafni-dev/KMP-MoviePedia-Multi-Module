@@ -1,6 +1,6 @@
 package com.ridhoafni.kmpmoviepedia.features.search.ui
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.MutableStateFlow
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
@@ -11,8 +11,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 
 @OptIn(FlowPreview::class)
@@ -21,12 +19,12 @@ class SearchViewModel(
 ) : ViewModel() {
     private val _state = MutableStateFlow(viewModelScope, SearchUiState())
 
-    @NativeCoroutineScope
+    @NativeCoroutinesState
     val uiState: StateFlow<SearchUiState> = _state
 
     private val _query = MutableStateFlow(viewModelScope, "")
 
-    @NativeCoroutineScope
+    @NativeCoroutinesState
     val query: StateFlow<String> = _query
 
     fun updateQuery(q: String) {
