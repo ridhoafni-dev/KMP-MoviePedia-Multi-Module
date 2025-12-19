@@ -1,5 +1,5 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.external.project
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -19,6 +19,15 @@ kotlin {
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "Shared"
+
+            export(project(":core:network"))
+            export(project(":features:search:data"))
+            export(project(":features:search:domain"))
+            export(project(":features:search:ui"))
+            export(project(":features:details:data"))
+            export(project(":features:details:domain"))
+            export(project(":features:details:ui"))
+
             isStatic = true
         }
     }
@@ -27,7 +36,18 @@ kotlin {
         androidMain.dependencies {
         }
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
+
+            api(projects.core.network)
+
+            api(projects.features.search.data)
+            api(projects.features.search.domain)
+            api(projects.features.search.ui)
+
+            api(projects.features.details.data)
+            api(projects.features.details.domain)
+            api(projects.features.details.ui)
+
+            implementation(libs.koin.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
